@@ -1,0 +1,84 @@
+
+name: Validate and Deploy to Hugging Face
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate project files
+        run: |
+          python -m py_compile app.py export_model.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          files = [
+              "app.py",
+              "requirements.txt",
+              "tuned_model.keras",
+              "preprocessor.joblib",
+              "model_data.json",
+              "export_model.py"
+          ]
+
+          for filename in files:
+              assert Path(filename).is_file(), filename
+
+          with open("model_data.json") as f:
+              data = json.load(f)
+
+          assert len(data["layers"]) == 3
+          assert len(data["categories"]) == 9
+          assert len(data["means"]) == 14
+
+          print("Project validation passed.")
+          PY
+
+      - name: Install Hugging Face client
+        run: python -m pip install huggingface_hub
+
+      - name: Publish files to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os
+          from huggingface_hub import HfApi
+
+          api = HfApi(token=os.environ["HF_TOKEN"])
+
+          api.upload_folder(
+              repo_id="Qi02/credit-card-default-prediction",
+              repo_type="space",
+              folder_path=".",
+              allow_patterns=[
+                  "app.py",
+                  "requirements.txt",
+                  "tuned_model.keras",
+                  "preprocessor.joblib",
+                  "model_data.json",
+                  "export_model.py"
+              ],
+              commit_message="Deploy files from GitHub Actions"
+          )
+
+          print("Files published successfully.")
+          PY

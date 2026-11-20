@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Default Prediction</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background: #f3f6fb;
+            color: #293548;
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        header, section {
+            background: white;
+            padding: 28px 34px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        h1 { color: #17375e; margin-bottom: 8px; }
+        h2 { color: #214d7c; margin-top: 0; }
+        .subtitle { color: #65758b; }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .metric {
+            background: #edf4fc;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 25px;
+            color: #174e86;
+        }
+
+        .metric span { font-size: 13px; }
+
+        a {
+            color: #185ca4;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: #758397;
+            font-size: 13px;
+        }
+
+        @media (max-width: 650px) {
+            .metrics { grid-template-columns: repeat(2, 1fr); }
+            header, section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <h1>Credit Card Default Prediction</h1>
+        <p class="subtitle">
+            AAI 6610 - Applied Machine Learning
+        </p>
+        <p>
+            Neural Network Model | Model Tuning |
+            GitHub Actions CI/CD
+        </p>
+    </header>
+
+    <section>
+        <h2>Project Overview</h2>
+        <p>
+            This project investigates credit card default
+            prediction using a neural network model.
+            The dataset contains 30,000 customer records
+            and 23 original input features.
+        </p>
+        <p>
+            The objective is to identify customers who
+            may default on their credit card payments.
+        </p>
+    </section>
+
+    <section>
+        <h2>Neural Network Model</h2>
+        <p>
+            The final model was trained using TensorFlow
+            and Keras. It contains two hidden layers
+            with 32 and 16 neurons.
+        </p>
+        <p>
+            Hyperparameter tuning was performed using
+            eight configurations. Model selection was
+            based on validation F1 score.
+        </p>
+    </section>
+
+    <section>
+        <h2>Model Performance</h2>
+        <div class="metrics">
+            <div class="metric">
+                <strong>81.92%</strong>
+                <span>Accuracy</span>
+            </div>
+            <div class="metric">
+                <strong>65.43%</strong>
+                <span>Precision</span>
+            </div>
+            <div class="metric">
+                <strong>38.66%</strong>
+                <span>Recall</span>
+            </div>
+            <div class="metric">
+                <strong>0.4860</strong>
+                <span>F1 Score</span>
+            </div>
+        </div>
+        <p>
+            These results are from the tuned model
+            evaluated on the test dataset.
+        </p>
+    </section>
+
+    <section>
+        <h2>Deployment and CI/CD</h2>
+        <p>
+            The project uses GitHub for source code
+            management. GitHub Actions performs basic
+            validation and automatically publishes
+            project files to Hugging Face Spaces.
+        </p>
+    </section>
+
+    <section>
+        <h2>Deployment Limitations</h2>
+        <p>
+            This Space uses Static HTML hosting.
+            It presents the project and published
+            model files but does not execute
+            Python-based model predictions online.
+        </p>
+        <p>
+            A Gradio interface was also developed
+            and launched in the local environment.
+        </p>
+    </section>
+
+    <section>
+        <h2>Project Repository</h2>
+        <p>
+            <a href="https://github.com/QiLiu21229/credit-card-default-prediction">
+                View Source Code on GitHub
+            </a>
+        </p>
+    </section>
+
+    <footer>
+        AAI 6610 Applied Machine Learning
+    </footer>
+
+</div>
+</body>
+</html>

@@ -75,7 +75,8 @@ jobs:
                   "tuned_model.keras",
                   "preprocessor.joblib",
                   "model_data.json",
-                  "export_model.py"
+                  "export_model.py",
+                  "index.html"
               ],
               commit_message="Deploy files from GitHub Actions"
           )
